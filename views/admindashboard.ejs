@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/admindashboard.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" sizes="76x76" type="image/x-icon"
+        href="https://a0.muscache.com/airbnb/static/logotype_favicon-21cc8e6c6a2cca43f061d2dcabdf6e58.ico">
+</head>
+
+<body>
+    <div class="container-fluid p-0">
+        <div class="table-wrapper mt-3">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a href="#" style="color:white;text-decoration: none;">
+                            <h2 class="d-none d-sm-block">Manage <b>Properties</b></h2>
+                        </a>
+                    </div>
+                    <div class="col-sm-6 d-flex justify-content-end btn-groups">
+                        <a href="/admin-logout" class="btn btn-danger" style="text-shadow: 0px 0px 1px black;"> <span>Log out</span></a>
+                        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target=".list-property" style="text-shadow: 0px 0px 1px black;"> <span>Add New
+                                Property</span></a>
+                    </div>
+                </div>
+            </div>
+            <% if(message.success){%>
+                <div data-aos="fade-down" class="alert alert-success alert-dismissible fade show mt-3 mb-3" role="alert"
+                    style="margin:0px 35px">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                        </symbol>
+                        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                                d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+                        </symbol>
+                        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                                d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                        </symbol>
+                    </svg>
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                        <use xlink:href="#check-circle-fill" />
+                    </svg>
+                    <%= message.success%>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <% } %>
+                    <% if(message.error){%>
+                        <div data-aos="fade-down" class="alert alert-danger alert-dismissible fade show mt-3 mb-3" role="alert"
+                            style="margin:0px 35px">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                                    <path
+                                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                </symbol>
+                                <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+                                </symbol>
+                                <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                </symbol>
+                            </svg>
+                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                                <use xlink:href="#exclamation-triangle-fill" />
+                            </svg>
+                            <%= message.error%>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <% } %>
+                            <table class="table table-striped table-hover">
+                                <thead class="bg-danger text-white">
+                                    <tr>
+                                        <th class="id">ID</th>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% listings.map(property=> { %>
+                                        <tr>
+                                            <td class="id"><%= property._id %></td>
+                                            <td>
+                                                <img class="d-none d-sm-block desktop-img"
+                                                    src="/uploads/<%=property.image%>"
+                                                    alt="">
+                                                <img class="mobile-img d-lg-none"
+                                                    src="/uploads/<%=property.image%>"
+                                                    alt="">
+                                            </td>
+                                            <td><%= property.propertyName %></td>
+                                            <td><%= property.price %></td>
+                                            <td>
+                                                <a id="editbtn" class="edit" data-propertyName="<%= property.propertyName %>" data-city="<%= property.city %>"
+                                                    data-state="<%= property.state %>" data-country="<%= property.country %>" data-address="<%= property.address %>"
+                                                    data-price="<%= property.price %>" data-bed="<%= property.bed %>" data-bathRoom="<%= property.bathRoom %>"
+                                                    data-cancellationPolicies="<%= property.cancellationPolicies %>" data-property_id="<%= property._id %>"><i
+                                                        class="material-icons" data-bs-toggle="tooltip"
+                                                        title="Edit">&#xE254;</i>
+                                                </a>
+                                                <a href="/delete/<%=property._id%>" class="delete"><i
+                                                        class="material-icons"
+                                                        title="Delete">&#xE872;</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+                            </table>
+                            <div class="clearfix">
+                                <div class="hint-text">Showing <b><%= listings.length %></b> out of <b><%= listings.length %></b> entries</div>
+                                <ul class="pagination">
+                                    <li class="page-item disabled"><a href="#">Previous</a></li>
+                                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">3</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                                </ul>
+                            </div>
+        </div>
+    </div>
+
+    <!-- list property Modal -->
+
+    <div class="modal list-property" tabindex="-1" role="dialog" id="list-property-modal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div style="display: flex;justify-content: center;">
+                        <h3 style="font-weight: bold;" class="modal-title">List Your Property</h3>
+                    </div>
+                    <h1 style="font-weight: bold;" type="button" class="close" data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </h1>
+                </div>
+                <div class="modal-body">
+                    <form action='/list-property' method="post" id="listPropertyForm" autocomplete="off"
+                        enctype="multipart/form-data">
+                        <input type='text' name="propertyName" placeholder='Property Name'
+                            style="width: 100%;padding:10px 24px" required>
+                        <br /> <br />
+                        <input type='file' name="image" placeholder='Image' style="width: 100%;padding:10px 24px"
+                            required accept=".jpeg,.jpg,.png" title="Property Image" />
+                        <br /> <br />
+                        <input type='text' name="city" placeholder='City' style="width: 100%;padding:10px 24px"
+                            required />
+                        <br /> <br />
+                        <input type='text' name="state" placeholder='State' style="width: 100%;padding:10px 24px"
+                            required />
+                        <br /> <br />
+                        <input type='text' name="country" placeholder='Country' style="width: 100%;padding:10px 24px"
+                            required />
+                        <br /> <br />
+                        <input type='text' name="address" placeholder='Address' style="width: 100%;padding:10px 24px;"
+                            required />
+                        <br /> <br />
+                        <input type='number' name="price" placeholder='Price' style="width: 100%;padding:10px 24px;"
+                            required />
+                        <br /> <br />
+                        <input type='number' name="bed" placeholder='Bed' style="width: 100%;padding:10px 24px;"
+                            required />
+                        <br /> <br />
+                        <input type='number' name="bathRoom" placeholder='Bathroom'
+                            style="width: 100%;padding:10px 24px;" required />
+                        <br /> <br />
+                        <input type='text' name="cancellationPolicies" placeholder='Cancellation Policies'
+                            style="width: 100%;padding:10px 24px;" required />
+                        <br /> <br />
+                        <input id="submitProperty" type='submit' value="SUBMIT PROPERTY"
+                            style="width: 100% ; background-image: radial-gradient( circle at center,#ff385c 0%,#e61e4d 27.5%,#e31c5f 40%,#d70466 57.5%,#bd1e59 75%,#bd1e59 100% ); color: white ; border: none;">
+                        <br /> <br />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- edit property Modal -->
+
+    <div class="modal edit-property" tabindex="-1" role="dialog" id="edit-property-modal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div style="display: flex;justify-content: center;">
+                        <h3 style="font-weight: bold;" class="modal-title">Update Property</h3>
+                    </div>
+                    <h1 style="font-weight: bold;" type="button" class="close" data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </h1>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="editPropertyForm" class="editPropertyForm" autocomplete="off"
+                        enctype="multipart/form-data">
+                        <input type='text' name="propertyName" placeholder='Property Name'
+                            style="width: 100%;padding:10px 24px" required id="editpropertyname" class="editpropertyname">
+                        <br /> <br />
+                        <input type='file' name="image" placeholder='Image' style="width: 100%;padding:10px 24px"
+                             accept=".jpeg,.jpg,.png" title="Property Image" />
+                        <br /> <br />
+                        <input type='text' name="city" placeholder='City' style="width: 100%;padding:10px 24px"
+                            required id="editcity" class="editcity"/>
+                        <br /> <br />
+                        <input type='text' name="state" placeholder='State' style="width: 100%;padding:10px 24px"
+                            required id="editstate" class="editstate"/>
+                        <br /> <br />
+                        <input type='text' name="country" placeholder='Country' style="width: 100%;padding:10px 24px"
+                            required id="editcountry" class="editcountry"/>
+                        <br /> <br />
+                        <input type='text' name="address" placeholder='Address' style="width: 100%;padding:10px 24px;"
+                            required id="editaddress" class="editaddress"/>
+                        <br /> <br />
+                        <input type='number' name="price" placeholder='Price' style="width: 100%;padding:10px 24px;"
+                            required id="editprice" class="editprice"/>
+                        <br /> <br />
+                        <input type='number' name="bed" placeholder='Bed' style="width: 100%;padding:10px 24px;"
+                            required id="editbed" class="editbed"/>
+                        <br /> <br />
+                        <input type='number' name="bathRoom" placeholder='Bathroom'
+                            style="width: 100%;padding:10px 24px;" required id="editbathroom" class="editbathroom"/>
+                        <br /> <br />
+                        <input type='text' name="cancellationPolicies" placeholder='Cancellation Policies'
+                            style="width: 100%;padding:10px 24px;" required id="editcancellationpolicies" class="editcancellationpolicies"/>
+                        <br /> <br />
+                        <input id="updateProperty" type='submit' value="UPDATE PROPERTY"
+                            style="width: 100% ; background-image: radial-gradient( circle at center,#ff385c 0%,#e61e4d 27.5%,#e31c5f 40%,#d70466 57.5%,#bd1e59 75%,#bd1e59 100% ); color: white ; border: none;">
+                        <br /> <br />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+    </script>
+    <script>
+        const alert = document.querySelector(".alert")
+        setTimeout(() => {
+            alert.style.display = 'none'
+        }, 4000)
+
+        const editpropertyname = document.querySelector('.editpropertyname')
+        const editcity = document.querySelector('.editcity')
+        const editstate = document.querySelector('.editstate')
+        const editcountry = document.querySelector('.editcountry')
+        const editaddress = document.querySelector('.editaddress')
+        const editprice = document.querySelector('.editprice')
+        const editbed = document.querySelector('.editbed')
+        const editbathroom = document.querySelector('.editbathroom')
+        const editcancellationpolicies = document.querySelector('.editcancellationpolicies')
+        const editPropertyModal = new bootstrap.Modal(document.getElementById('edit-property-modal'))
+        const editPropertyForm = document.querySelector('.editPropertyForm')
+
+        const editbtn = document.querySelectorAll('.edit')
+
+        editbtn.forEach(editbtn =>{
+            editbtn.addEventListener('click', async () => {
+                editPropertyForm.setAttribute('action', '/update/' + editbtn.getAttribute('data-property_id'))
+                editpropertyname.value = editbtn.getAttribute('data-propertyName')
+                editcity.value = editbtn.getAttribute('data-city')
+                editstate.value = editbtn.getAttribute('data-state')
+                editcountry.value = editbtn.getAttribute('data-country')
+                editaddress.value = editbtn.getAttribute('data-address')
+                editprice.value = editbtn.getAttribute('data-price')
+                editbed.value = editbtn.getAttribute('data-bed')
+                editbathroom.value = editbtn.getAttribute('data-bathRoom')
+                editcancellationpolicies.value = editbtn.getAttribute('data-cancellationPolicies')   
+
+                editPropertyModal.show()
+            })
+        })
+
+
+    </script>
+</body>
+
+</html>

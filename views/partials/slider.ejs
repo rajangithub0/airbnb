@@ -1,0 +1,86 @@
+<!-- filter Modal -->
+
+<div class="modal filters" tabindex="-1" role="dialog" id="sign-up-modal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div style="display: flex;justify-content: center;">
+                    <h3 style="font-weight: bold;text-align: center;" class="modal-title">Filters</h3>
+                </div>
+                <h1 style="font-weight: bold;text-align: center;" type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </h1>
+            </div>
+            <div class="modal-body">
+                <form action='/' method="get" id="registerForm" autocomplete="off">
+                    <div class="wrpper">
+                        <h4 style="text-align: center;font-weight: bold;">Price range</h4>
+                        <div class="price-input">
+                            <div class="field">
+                                <span>Min</span>
+                                <input type="number" class="input-min" value="9000">
+                            </div>
+                            <div class="separator">-</div>
+                            <div class="field">
+                                <span>Max</span>
+                                <input type="number" class="input-max" value="15000">
+                            </div>
+                            </div>
+                            <div class="slider">
+                                <div class="progress"></div>
+                            </div>
+                            <div class="range-input">
+                                <input type="range" name="minPrice" class="range-min" min="0" max="50000" value="2500" step="100">
+                                <input type="range" name="maxPrice" class="range-max" min="0" max="50000" value="7500" step="100">
+                            </div>
+                        </div>
+                    </div>
+                    <br /> <br />
+                    <input id="signupbtn" type='submit' value="Show places"
+                        style="width: 90% ; background-image: radial-gradient( circle at center,#ff385c 0%,#e61e4d 27.5%,#e31c5f 40%,#d70466 57.5%,#bd1e59 75%,#bd1e59 100% ); color: white ; border: none;margin: 0 auto;">
+                    <br /> <br />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid slider-container" id="slider" style="background-color: white !important;">
+    <div class="row p-0">
+        <div class="col-11 cat p-0">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <% images.map((img,index)=>{%>
+                        <div class="swiper-slide">
+                            <div style="display: flex;justify-content: center;">
+                                <div class="img-data">
+                                    <img src="<%= img.imgSrc %>" alt="img" id="<%= index === 0 ? 'first-image' : '' %>">
+
+                                    <p>
+                                        <%= img.label %>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <% })%>
+
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+
+        </div>
+        <div class="col-1 p-0" style="display: flex;justify-content: space-between;align-items: center;">
+            <div class="filter" data-bs-toggle="modal" data-bs-target=".filters" style="text-align: center;">
+                <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"
+                    focusable="false" style="display: block; height: 14px; width: 14px; fill: currentcolor;">
+                    <path
+                        d="M5 8c1.306 0 2.418.835 2.83 2H14v2H7.829A3.001 3.001 0 1 1 5 8zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6-8a3 3 0 1 1-2.829 4H2V4h6.17A3.001 3.001 0 0 1 11 2zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z">
+                    </path>
+                </svg>
+                Filters
+            </div>
+        </div>
+
+    </div>
+</div>

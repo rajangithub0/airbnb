@@ -1,0 +1,41 @@
+.card img {
+  width: 270px;
+  height: 270px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+.info p{
+    font-weight: bolder;
+    opacity: 1;
+    text-transform: capitalize;
+}
+.info span{
+    font-weight: normal;
+    text-transform: lowercase;
+}
+.property-card{
+    text-decoration: none;
+    color: black;
+}
+
+@media screen and (max-width:575px){
+    .card{
+        width: 800px !important;
+    }
+   .img-div img{
+        width: 90% !important;
+    }
+    
+}
+
+@media screen and (min-width:1880px){
+    .card img {
+  width: 350px;
+  height: 350px;
+ 
+}
+.card{
+    height: 25rem !important;
+}
+
+}
